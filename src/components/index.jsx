@@ -22,11 +22,12 @@ const Form = () => {
     },
     validationSchema: MailSchema,
     onSubmit: async (values) => {
-      setAni(!ani);
-      enqueueSnackbar(
-        "Send Mail.Please check your mail(Inbox or Spam section)",
-        { variant: "success" }
-      );
+      ani === true
+        ? enqueueSnackbar(
+            "Send Mail.Please check your mail(Inbox or Spam section)",
+            { variant: "success" }
+          )
+        : enqueueSnackbar("Please Reload Page", { variant: "info" });
       const emailData = {
         Host: process.env.REACT_APP_SMPT_HOST,
         Username: process.env.REACT_APP_SMPT_USERNAME,
@@ -112,12 +113,8 @@ const Form = () => {
                 `,
         IsHtml: true,
       };
-      console.log(emailData);
-      try {
-        await window.Email.send(emailData);
-      } catch (error) {
-        console.error("Email send error:", error);
-      }
+      ani === true ? await window.Email.send(emailData) : "";
+      setAni(false);
     },
   });
   const textFieldStyles = {
