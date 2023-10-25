@@ -24,7 +24,7 @@ const Form = () => {
     onSubmit: async (values) => {
       ani === true
         ? enqueueSnackbar(
-            "Send Mail.Please check your mail(Inbox or Spam section)",
+            "Send Mail",
             { variant: "success" }
           )
         : enqueueSnackbar("Please Reload Page", { variant: "info" });
